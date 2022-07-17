@@ -35,14 +35,14 @@ else:
             testnet = True
             i += 1
         elif sys.argv[i] == '--coin':
-            coinname = sys.argv[i+1].lower()
+            coinname = sys.argv[i + 1].lower()
             try:
                 coin = coins[coinname]
             except KeyError:
                 raise Exception('Coin %s not recognised. Choose from: %s ' % (coin, ','.join(coins.keys())))
             i += 2
         elif sys.argv[i][:2] == '--':
-            kwargs[sys.argv[i][2:]] = sys.argv[i+1]
+            kwargs[sys.argv[i][2:]] = sys.argv[i + 1]
             i += 2
         else:
             cmdargs.append(sys.argv[i])

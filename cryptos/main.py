@@ -1,5 +1,4 @@
 #!/usr/bin/python
-from .py2specials import *
 from .py3specials import *
 import binascii
 import hashlib

@@ -9,7 +9,6 @@
 
 '''Script to send RPC commands to a running ElectrumX server.'''
 
-
 import asyncio
 import json
 import random
@@ -24,7 +23,7 @@ class RPCClient(JSONSession):
     def __init__(self):
         super().__init__(version=JSONRPCv2)
         self.max_send = 0
-        self.max_buffer_size = 5*10**6
+        self.max_buffer_size = 5 * 10 ** 6
         self.result = {}
 
     async def wait_for_response(self, id_):
@@ -54,9 +53,11 @@ def read_json(filename, default):
         r = default
     return r
 
+
 class ElectrumXClient(RPCClient):
 
-    def __init__(self, server_file="bitcoin.json", servers=(), host=None, port=50001, timeout=15, max_servers=5, loop=None):
+    def __init__(self, server_file="bitcoin.json", servers=(), host=None, port=50001, timeout=15, max_servers=5,
+                 loop=None):
         super().__init__()
         if loop:
             self.loop = loop
@@ -140,5 +141,3 @@ class ElectrumXClient(RPCClient):
                 u['address'] = addr
                 unspents.append(u)
         return unspents
-
-    

@@ -13,7 +13,7 @@ def bip32_hdm_script(*args):
             keys.append(args[i])
             i += 1
         req = int(args[i])
-        path = map(int, args[i+1:])
+        path = map(int, args[i + 1:])
     pubs = sorted(map(lambda x: bip32_descend(x, path), keys))
     return mk_multisig_script(pubs, req)
 
@@ -28,7 +28,7 @@ def setup_coinvault_tx(tx, script):
     txobj = deserialize(tx)
     N = deserialize_script(script)[-2]
     for inp in txobj["ins"]:
-        inp["script"] = serialize_script([None] * (N+1) + [script])
+        inp["script"] = serialize_script([None] * (N + 1) + [script])
     return serialize(txobj)
 
 
@@ -43,7 +43,7 @@ def sign_coinvault_tx(tx, priv):
         scr = deserialize_script(txobj['ins'][j]['script'])
         for i, p in enumerate(pubs):
             if p == pub:
-                scr[i+1] = multisign(tx, j, subscript[-1], priv)
+                scr[i + 1] = multisign(tx, j, subscript[-1], priv)
         if len(filter(lambda x: x, scr[1:-1])) >= k:
             scr = [None] + filter(lambda x: x, scr[1:-1])[:k] + [scr[-1]]
         txobj['ins'][j]['script'] = serialize_script(scr)

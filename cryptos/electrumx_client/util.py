@@ -1,5 +1,6 @@
 import logging
 
+
 class LoggedClass(object):
 
     def __init__(self):

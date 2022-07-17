@@ -6,6 +6,7 @@ from ..py3specials import bin_to_b58check
 
 FORKID_BTG = 79
 
+
 class BitcoinGold(BaseCoin):
     coin_symbol = "btg"
     display_name = "Bitcoin Gold"

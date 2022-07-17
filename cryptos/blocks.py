@@ -34,7 +34,7 @@ def mk_merkle_proof(header, hashes, index):
     while len(nodes) > 1:
         newnodes = []
         for i in range(0, len(nodes) - 1, 2):
-            newnodes.append(bin_sha256(bin_sha256(nodes[i] + nodes[i+1])))
+            newnodes.append(bin_sha256(bin_sha256(nodes[i] + nodes[i + 1])))
         if len(newnodes) % 2 and len(newnodes) > 2:
             newnodes.append(newnodes[-1])
         nodes = newnodes
@@ -42,7 +42,7 @@ def mk_merkle_proof(header, hashes, index):
     # Sanity check, make sure merkle root is valid
     assert bytes_to_hex_string(nodes[0][::-1]) == header['merkle_root']
     merkle_siblings = \
-        [layers[i][(index >> i) ^ 1] for i in range(len(layers)-1)]
+        [layers[i][(index >> i) ^ 1] for i in range(len(layers) - 1)]
     return {
         "hash": hashes[index],
         "siblings": [bytes_to_hex_string(x[::-1]) for x in merkle_siblings],

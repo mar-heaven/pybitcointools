@@ -2,6 +2,7 @@ from .base import BaseCoin
 from ..transaction import SIGHASH_ALL, SIGHASH_FORKID
 from ..explorers import blockdozer
 
+
 class BitcoinCash(BaseCoin):
     coin_symbol = "bch"
     display_name = "Bitcoin Cash"

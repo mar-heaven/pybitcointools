@@ -1,5 +1,6 @@
 from . import main
 
+
 # Shared secrets and uncovering pay keys
 
 
@@ -29,6 +30,7 @@ def uncover_pay_privkey(scan_privkey, spend_privkey, ephem_pubkey):
     shared_secret = shared_secret_receiver(ephem_pubkey, scan_privkey)
     return main.add_privkeys(spend_privkey, shared_secret)
 
+
 # Address encoding
 
 # Functions for basic stealth addresses,
@@ -53,6 +55,7 @@ def basic_stealth_address_to_pubkeys(stealth_address):
     spend_pubkey = hex_data[70:136]
     return scan_pubkey, spend_pubkey
 
+
 # Sending stealth payments
 
 
@@ -64,7 +67,6 @@ def mk_stealth_metadata_script(ephem_pubkey, nonce):
 
 
 def mk_stealth_tx_outputs(stealth_addr, value, ephem_privkey, nonce, network='btc'):
-
     scan_pubkey, spend_pubkey = basic_stealth_address_to_pubkeys(stealth_addr)
 
     if network == 'btc':
@@ -89,6 +91,7 @@ def mk_stealth_tx_outputs(stealth_addr, value, ephem_privkey, nonce, network='bt
                'value': value}
 
     return [output0, output1]
+
 
 # Receiving stealth payments
 

@@ -1,6 +1,7 @@
 from .main import *
 from .keystore import xpubkey_to_address
 
+
 class HDWallet(object):
 
     def __init__(self, keystore, num_addresses=0, last_receiving_index=0, last_change_index=0):
@@ -72,11 +73,11 @@ class HDWallet(object):
 
     def new_receiving_address_range(self, num):
         index = self.last_receiving_index
-        return range(index, index+num)
+        return range(index, index + num)
 
     def new_change_address_range(self, num):
         index = self.last_change_index
-        return range(index, index+num)
+        return range(index, index + num)
 
     def new_receiving_addresses(self, num=10):
         addresses = list(map(self.receiving_address, self.new_receiving_address_range(num)))

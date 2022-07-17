@@ -42,6 +42,7 @@ from . import util
 
 class RPCError(Exception):
     '''RPC handlers raise this error.'''
+
     def __init__(self, msg, code=-1, **kw_args):
         super().__init__(**kw_args)
         self.msg = msg
@@ -205,6 +206,7 @@ class JSONRPCCompat(JSONRPC):
     compatible so v2 errors are sent.
     Does not send responses or notifications, nor handle responses.
     '''
+
     @classmethod
     def request_payload(cls, id_, method, params=None):
         '''JSON v2 request payload but with params present.'''
@@ -223,6 +225,7 @@ class JSONRPCCompat(JSONRPC):
         payload.
         Return None if one cannot be determined.
         '''
+
         def item_version(item):
             if isinstance(item, dict):
                 version = item.get('jsonrpc')
@@ -251,7 +254,7 @@ class JSONSessionBase(util.LoggedClass):
     from empty
     '''
     _next_session_id = 0
-    _pending_reqs = {}    # Outgoing requests waiting for a response
+    _pending_reqs = {}  # Outgoing requests waiting for a response
 
     @classmethod
     def next_session_id(cls):
@@ -313,7 +316,7 @@ class JSONSessionBase(util.LoggedClass):
         self.pause = False
         # Handling of incoming items
         self.items = collections.deque()
-        self.items_events ={}
+        self.items_events = {}
         self.items_event = asyncio.Event()
         self.batch_results = []
         # Handling of outgoing requests
@@ -670,7 +673,7 @@ class JSONSessionBase(util.LoggedClass):
         self.send_binary(self.request_bytes(id_, method, params))
         self.items_events[id_] = asyncio.Event()
         self._pending_reqs[(self, id_)] = (handler, time.time() + timeout)
-        return  id_
+        return id_
 
     def send_notification(self, method, params=None):
         '''Send a notification.'''
